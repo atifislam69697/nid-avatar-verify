@@ -129,7 +129,8 @@ class MainActivity : AppCompatActivity() {
                 }
             } ?: 0f
             if (rotation != 0f) {
-                val m = Matrix().postRotate(rotation)
+                val m = Matrix()
+                m.postRotate(rotation)
                 bmp = Bitmap.createBitmap(bmp, 0, 0, bmp.width, bmp.height, m, true)
             }
             bmp
@@ -215,7 +216,7 @@ class MainActivity : AppCompatActivity() {
         personsFile().writeText(arr.toString())
     }
 
-    private fun processImage(uri: Uri, action: Int) {
+    private suspend fun processImage(uri: Uri, action: Int) {
         val bitmap = decodeBitmap(uri)
         if (bitmap == null) {
             showStatus("ছবি পড়া যায়নি")
